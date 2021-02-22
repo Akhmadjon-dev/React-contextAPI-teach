@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, createContext } from "react";
+import Header from "./Header";
+import List from "./List";
+import BacketContext from "./context/backet";
+
+import "./App.css";
+import Backet from "./Backet";
 
 function App() {
+  const [data, setData] = useState([
+    { title: "cocaCola", price: 2000 },
+    { title: "fanta", price: 4000 },
+    { title: "fanta", price: 4000 },
+    { title: "fanta", price: 4000 },
+    { title: "fanta", price: 4000 },
+    { title: "fanta", price: 4000 },
+  ]);
+  const [isShow, setIsShow] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BacketContext>
+      <div className="app">
+        <Header />
+        <button onClick={() => setIsShow(!isShow)}>Toggle bascket</button>
+        {isShow ? <Backet /> : <List data={data} />}
+      </div>
+    </BacketContext>
   );
 }
 
